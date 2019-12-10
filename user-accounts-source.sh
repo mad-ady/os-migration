@@ -21,6 +21,9 @@ if [ "$#" -eq "1" ]; then
     awk -v LIMIT=$UGIDLIMIT -F: '($3>=LIMIT) && ($3!=65534) {print $1}' /etc/passwd | tee - |egrep -f - /etc/shadow > "$DST/shadow.mig"
     cp /etc/gshadow "$DST/gshadow.mig"
     tar -zcvpf "$DST/home.tar.gz" /home
+    #copy over user crontabs
+    mkdir "$DST/crontab"
+    cp /var/spool/cron/* "$DST/crontab/"
 
     echo "*** Export done to $DST ***"
 else
