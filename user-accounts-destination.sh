@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 echo "This script restores and unpacks user accounts on this system from a backup".
 echo "**** WARNING! The script can run only once and has no sanity checks! ****"
