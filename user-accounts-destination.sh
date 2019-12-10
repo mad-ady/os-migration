@@ -29,5 +29,6 @@ if [ "$#" -eq "1" ]; then
     cp "$SRC"/crontab/* /var/spool/crontabs
 
     echo "Done. Backups are in $BKP. You can delete $SRC."
-
+else
+    echo "Usage: $0 /path/to/backup/dir"
 fi
