@@ -10,12 +10,17 @@ if [ "$UID" -ne "0" ]; then
 fi
 
 if [ "$#" -eq "1" ]; then
-    DST=`$1/yum-manual.txt`;
+    DST="$1/yum-manual.txt";
     echo "*** Extracting packages to $DST ***"
-    SRC='/var/lib/yum/history/history-*.sqlite'
-    sqlite3 "$SRC" "select cmdline from trans_cmdline" | grep -oP  "^(?:-y)?\s*install \K(.*)" | xargs echo > "$DST"
-    sqlite3 "$SRC" "select cmdline from trans_cmdline" > "$1/yum-original.txt"
-    echo "*** Export done to $DST ***"
+    FILE=`basename /var/lib/yum/history/history-*.sqlite`
+    if [ -n "$FILE" ]; then
+        SRC=/var/lib/yum/history/$FILE
+        sqlite3 "$SRC" "select cmdline from trans_cmdline" | grep -oP  "^(?:-y)?\s*install \K(.*)" | xargs echo > "$DST"
+        sqlite3 "$SRC" "select cmdline from trans_cmdline" > "$1/yum-original.txt"
+        echo "*** Export done to $DST ***"
+    else
+        echo "Counldn't find history*.sqlite"
+    fi
 else
     echo "Usage: $0 /path/to/temp/dir"
 fi
