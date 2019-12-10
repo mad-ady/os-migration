@@ -22,11 +22,10 @@ if [ "$#" -eq "1" ]; then
     cp gshadow.mig /etc/gshadow
 
     #restore /home
-    cd /
-    tar -zxvf "$SRC/home.tar.gz"
+    tar -zxvf "home.tar.gz" -C /
 
     #restore crontabs
-    cp "$SRC"/crontab/* /var/spool/crontabs
+    cp crontab/* /var/spool/crontabs
 
     echo "Done. Backups are in $BKP. You can delete $SRC."
 else
