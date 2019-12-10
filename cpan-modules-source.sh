@@ -9,4 +9,8 @@ fi
 
 perl -MCPAN -eautobundle
 
-echo "To install on a new system: perl -MCPAN -e 'install Bundle::Snapshot_2019_12_10_00'"
+echo "*** To install on a new system:
+   mkdir /root/.cpan/Bundle
+   cp Snapshot_*.pm /root/.cpan/Bundle/
+   perl -MCPAN -e 'install Bundle::Snapshot_2019_12_10_00'
+"
