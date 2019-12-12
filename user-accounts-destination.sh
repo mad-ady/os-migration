@@ -25,7 +25,7 @@ if [ "$#" -eq "1" ]; then
     tar -zxvf "home.tar.gz" -C /
 
     #restore crontabs
-    cp crontab/* /var/spool/crontabs
+    cp crontab/* /var/spool/cron/
 
     echo "Done. Backups are in $BKP. You can delete $SRC."
 else
